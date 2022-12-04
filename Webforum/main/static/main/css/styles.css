@@ -1,0 +1,24 @@
+body {
+        background: url("../images/technical/background.jpg") repeat fixed center center;
+    background-size: 100%;
+}
+
+.size-90 {
+    font-size: 90px;
+}
+
+.size-25 {
+    font-size: 25px;
+}
+
+.abs-pos-homepage {
+    position: absolute;
+    left: auto;
+    right: auto;
+    top: 24%;
+    bottom: auto;
+}
+
+.ml-25percents {
+    margin-left: 12%;
+}

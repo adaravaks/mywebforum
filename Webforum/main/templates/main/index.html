@@ -1,0 +1,24 @@
+{% extends 'main/base-with-sidebar.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<h1 class="text-white">Посты</h1>
+{% if posts %}
+{% for post in posts %}
+<div class="alert-success alert mt-2">
+    <h3>{{ post.theme }}</h3>
+    <p>{{ post.text }}</p>
+    <div style="display: flex; justify-content: flex-end">
+        <button type="" class="btn btn-danger" style="margin-left: auto">Юзлесс кнопка</button>
+    </div>
+</div>
+{% endfor %}
+{% else %}
+<div class="alert-danger alert mt-2">
+    <p>Постов нет</p>
+</div>
+{% endif %}
+{% endblock %}
