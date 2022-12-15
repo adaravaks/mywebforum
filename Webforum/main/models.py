@@ -16,7 +16,7 @@ class Post(models.Model):
 class User(models.Model):
     username = models.CharField(max_length=30)
     about_user = models.TextField(blank=True)
-    profile_pic = models.ImageField(upload_to='photos/%Y%m%d/')
+    profile_pic = models.ImageField(upload_to='static/main/media/profile_pictures/%Y%m%d/')
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
 

@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Пользователи
+{% endblock %}
+
+{% block content %}
+{% if users %}
+{% for user in users %}
+<div class="alert alert-warning mt-2">
+  <h3>{{ user.username }}</h3>
+  <img src="{{ user.profile_pic }}" alt="">
+  <p>{{ user.about_user }}</p>
+</div>
+{% endfor %}
+{% else %}
+<p>Пользователей не найдено</p>
+{% endif %}
+{% endblock %}
