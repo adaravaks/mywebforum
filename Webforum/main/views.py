@@ -41,12 +41,12 @@ def newpost(request):
 def newuser(request):
     error = ''
     if request.method == 'POST':
-        form = NewUserForm(request.POST)
+        form = NewUserForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('users')
         else:
-            error = 'Ищи ошибку мудак'
+            error = 'Неверный ввод'
 
     form = NewUserForm()
     context = {

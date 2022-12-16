@@ -5,15 +5,18 @@
 {% endblock %}
 
 {% block content %}
+<h1 class="text-white">Пользователи</h1>
 {% if users %}
 {% for user in users %}
 <div class="alert alert-warning mt-2">
-  <h3>{{ user.username }}</h3>
-  <img src="{{ user.profile_pic }}" alt="">
-  <p>{{ user.about_user }}</p>
+  <img src="{{ user.profile_pic.url }}" alt="User's profile picture" width="250" height="200" class="d-inline-block">
+  <div class="d-inline-block align-top m-lg-3">
+    <h3>{{ user.username }}</h3>
+    <p>{{ user.about_user }}</p>
+  </div>
 </div>
 {% endfor %}
 {% else %}
-<p>Пользователей не найдено</p>
+<p class="text-white">Пользователей не найдено</p>
 {% endif %}
 {% endblock %}

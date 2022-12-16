@@ -20,7 +20,7 @@ class PostForm(ModelForm):
 class NewUserForm(ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'about_user']  # 'profile_pic']
+        fields = ['username', 'about_user', 'profile_pic']
         widgets = {
             'username': TextInput(attrs={
                 'class': 'form-control',
@@ -30,8 +30,8 @@ class NewUserForm(ModelForm):
                 'class': 'form-control',
                 'placeholder': 'О пользователе'}),
 
-            # 'profile_pic': FileInput(attrs={
-            #    'class': 'form-control'}),
+             'profile_pic': FileInput(attrs={
+                'class': 'form-control'}),
         }
 
 

@@ -6,11 +6,12 @@
 
 {% block content %}
 <h1 class="text-white">Создать пользователя</h1>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.username }} <br>
     {{ form.about_user }} <br>
+    {{ form.profile_pic }}
     <button type="submit" class="btn btn-success mt-5">Создать</button>
-    <span>{{ error }}</span>
+    <div><p class="text-white">{{ error }}</p></div>
 </form>
 {% endblock %}
