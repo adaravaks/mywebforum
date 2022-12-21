@@ -62,3 +62,7 @@ def users(request):
         'users': users,
     }
     return render(request, 'main/users.html', context)
+
+
+def theme(request):
+    return render(request, 'main/theme.html')

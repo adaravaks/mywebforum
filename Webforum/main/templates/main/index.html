@@ -12,7 +12,7 @@
     <h3>{{ post.theme }}</h3>
     <p>{{ post.text }}</p>
     <div style="display: flex; justify-content: flex-end">
-        <button type="" class="btn btn-danger" style="margin-left: auto">Юзлесс кнопка</button>
+        <a href="{% url 'theme' %}" class="btn btn-danger" style="margin-left: auto">В тему (пока что в пост, но скоро будет в тему)</a>
     </div>
 </div>
 {% endfor %}

@@ -9,8 +9,8 @@ class Post(models.Model):
         return self.theme
 
     class Meta:
-        verbose_name = 'Тема'
-        verbose_name_plural = 'Темы'
+        verbose_name = 'Пост'
+        verbose_name_plural = 'Посты'
 
 
 class User(models.Model):
