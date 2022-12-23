@@ -1,4 +1,4 @@
-from .models import Post, User
+from .models import Post, User, Theme
 from django.forms import ModelForm, TextInput, Textarea, FileInput
 
 
@@ -30,8 +30,26 @@ class NewUserForm(ModelForm):
                 'class': 'form-control',
                 'placeholder': 'О пользователе'}),
 
-             'profile_pic': FileInput(attrs={
-                'class': 'form-control'}),
+            'profile_pic': FileInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Аватарка пользователя'}),
         }
 
 
+class ThemeForm(ModelForm):
+    class Meta:
+        model = Theme
+        fields = ['header', 'text', 'media']
+        widgets = {
+            'header': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Заголовок темы'}),
+
+            'text': Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Текст темы'}),
+
+            'media': FileInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Вложение к теме'}),
+        }

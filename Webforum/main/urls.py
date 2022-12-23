@@ -8,5 +8,6 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('new-user', views.newuser, name='new-user'),
     path('users', views.users, name='users'),
-    path('theme', views.theme, name='theme')
+    path('theme', views.theme, name='theme'),
+    path('new-theme', views.newtheme, name='new-theme'),
 ]

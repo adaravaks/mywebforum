@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Post, User
-from .forms import PostForm, NewUserForm
+from .forms import PostForm, NewUserForm, ThemeForm
 
 
 def home(request):
@@ -23,7 +23,7 @@ def about(request):
 def newpost(request):
     error = ''
     if request.method == 'POST':
-        form = PostForm(request.POST)  # PostForm - мой класс, не джанговский. Не путать!
+        form = PostForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('index')
@@ -66,3 +66,23 @@ def users(request):
 
 def theme(request):
     return render(request, 'main/theme.html')
+
+
+def newtheme(request):
+    error = ''
+    if request.method == 'POST':
+        form = ThemeForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('theme')
+        else:
+            error = 'Неверный ввод'
+
+    form = ThemeForm()
+    context = {
+        'form': form,
+        'error': error
+    }
+    return render(request, 'main/new-theme.html', context)
+
+# Reformat functions names to camelCase later
