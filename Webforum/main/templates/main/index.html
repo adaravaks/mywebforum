@@ -5,20 +5,21 @@
 {% endblock %}
 
 {% block content %}
-<h1 class="text-white">Посты</h1>
-{% if posts %}
-{% for post in posts %}
+<h1 class="text-white">Темы</h1>
+{% if themes %}
+{% for theme in themes %}
 <div class="alert-success alert mt-2">
-    <h3>{{ post.theme }}</h3>
-    <p>{{ post.text }}</p>
+    <h3>{{ theme.header }}</h3>
+    <p>{{ theme.text }}</p>
+    <img src="{{ theme.media.url }}" alt="Медиа-вложение темы" width="300" height="300">
     <div style="display: flex; justify-content: flex-end">
-        <a href="{% url 'theme' %}" class="btn btn-danger" style="margin-left: auto">В тему (пока что в пост, но скоро будет в тему)</a>
+        <a href="{{ theme.get_absolute_url }}" class="btn btn-danger" style="margin-left: auto">В тему</a>
     </div>
 </div>
 {% endfor %}
 {% else %}
 <div class="alert-danger alert mt-2">
-    <p>Постов нет</p>
+    <p>Тем нет</p>
 </div>
 {% endif %}
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Post, User
+from .models import Post, User, Theme
 from .forms import PostForm, NewUserForm, ThemeForm
 
 
@@ -11,8 +11,8 @@ def home(request):
 
 
 def index(request):
-    posts = Post.objects.order_by('-id')
-    context = {'title': 'Главная страница', 'posts': posts}
+    themes = Theme.objects.order_by('-id')
+    context = {'title': 'Главная страница', 'themes': themes}
     return render(request, 'main/index.html', context)
 
 
@@ -64,8 +64,10 @@ def users(request):
     return render(request, 'main/users.html', context)
 
 
-def theme(request):
-    return render(request, 'main/theme.html')
+def theme(request, theme_id):
+    theme = Theme.objects.filter(id=theme_id)
+
+    return render(request, 'main/theme.html', {'theme_id': theme_id})
 
 
 def newtheme(request):
@@ -74,7 +76,7 @@ def newtheme(request):
         form = ThemeForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('theme')
+            return redirect('index')
         else:
             error = 'Неверный ввод'
 

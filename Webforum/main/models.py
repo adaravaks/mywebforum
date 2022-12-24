@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import SET_NULL, PROTECT
+from django.urls import reverse
 
 
 class Post(models.Model):
@@ -12,6 +13,9 @@ class Post(models.Model):
     class Meta:
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
+
+    def get_absolute_url(self):
+        return reverse('theme', kwargs={'theme_id': self.pk})
 
 
 class User(models.Model):
@@ -28,6 +32,9 @@ class User(models.Model):
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
 
+    def get_absolute_url(self):
+        return reverse('theme', kwargs={'theme_id': self.pk})
+
 
 class Theme(models.Model):
     header = models.CharField(max_length=100, db_index=True)
@@ -43,3 +50,6 @@ class Theme(models.Model):
     class Meta:
         verbose_name = 'Тема'
         verbose_name_plural = 'Темы'
+
+    def get_absolute_url(self):
+        return reverse('theme', kwargs={'theme_id': self.pk})
