@@ -5,5 +5,18 @@
 {% endblock %}
 
 {% block content %}
-<h1>Тема и ответы к ней</h1>
+<h1 class="text-white">Тема и ответы к ней</h1>
+{% if theme_from_main %}
+{% for theme in theme_from_main %}
+<div class="alert-success alert mt-2">
+    <h3>{{ theme.header }}</h3>
+    <p>{{ theme.text }}</p>
+    <img src="{{ theme.media.url }}" alt="Медиа-вложение темы" width="300" height="300">
+</div>
+{% endfor %}
+{% else %}
+<div class="alert-danger alert mt-2">
+    <p>Тем нет</p>
+</div>
+{% endif %}
 {% endblock %}

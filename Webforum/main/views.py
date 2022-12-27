@@ -65,9 +65,12 @@ def users(request):
 
 
 def theme(request, theme_id):
-    theme = Theme.objects.filter(id=theme_id)
-
-    return render(request, 'main/theme.html', {'theme_id': theme_id})
+    theme_from_main = Theme.objects.filter(pk=theme_id)
+    context = {
+        'theme_id': theme_id,
+        'theme_from_main': theme_from_main
+    }
+    return render(request, 'main/theme.html', context)
 
 
 def newtheme(request):
@@ -87,4 +90,4 @@ def newtheme(request):
     }
     return render(request, 'main/new-theme.html', context)
 
-# Reformat functions names to camelCase later
+# TODO: Reformat functions names to camelCase later
