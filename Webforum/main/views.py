@@ -66,9 +66,11 @@ def users(request):
 
 def theme(request, theme_id):
     theme_from_main = Theme.objects.filter(pk=theme_id)
+    posts_related = Post.objects.filter(parent_theme_id=theme_id)
     context = {
         'theme_id': theme_id,
-        'theme_from_main': theme_from_main
+        'theme_from_main': theme_from_main,
+        'posts_related': posts_related
     }
     return render(request, 'main/theme.html', context)
 

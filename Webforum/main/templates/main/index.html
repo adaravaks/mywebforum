@@ -12,6 +12,7 @@
     <h3>{{ theme.header }}</h3>
     <p>{{ theme.text }}</p>
     <img src="{{ theme.media.url }}" alt="Медиа-вложение темы" width="300" height="300">
+    <p>Дата создания темы: {{ theme.time_create }}</p>
     <div style="display: flex; justify-content: flex-end">
         <a href="{{ theme.get_absolute_url }}" class="btn btn-danger" style="margin-left: auto">В тему</a>
     </div>

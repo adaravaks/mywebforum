@@ -7,16 +7,31 @@
 {% block content %}
 <h1 class="text-white">Тема и ответы к ней</h1>
 {% if theme_from_main %}
-{% for theme in theme_from_main %}
+{% for theme in theme_from_main %}  <!-- TODO: Get rid of for loop here -->
 <div class="alert-success alert mt-2">
     <h3>{{ theme.header }}</h3>
     <p>{{ theme.text }}</p>
     <img src="{{ theme.media.url }}" alt="Медиа-вложение темы" width="300" height="300">
+    <p>Дата создания темы: {{ theme.time_create }}</p>
+</div>
+{% endfor %}
+{% if posts_related %}
+{% for post in posts_related %}
+<div class="alert-warning alert mt-2">
+    <h3>{{ post.theme }}</h3>
+    <p>{{ post.text }}</p>
+    <img src="{{ post.post_picture.url }}" alt="Медиа-вложение поста" width="200" height="200">
+    <p>Дата создания поста: {{ post.create_time }}</p>
 </div>
 {% endfor %}
 {% else %}
 <div class="alert-danger alert mt-2">
-    <p>Тем нет</p>
+    <p>Тему ещё никто не комментировал</p>
+</div>
+{% endif %}
+{% else %}
+<div class="alert-danger alert mt-2">
+    <p>Темы нет</p>
 </div>
 {% endif %}
 {% endblock %}

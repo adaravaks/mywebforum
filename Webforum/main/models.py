@@ -6,6 +6,11 @@ from django.urls import reverse
 class Post(models.Model):
     theme = models.CharField('Тема', max_length=70)
     text = models.TextField('Пост')
+    post_picture = models.ImageField(upload_to='communication_pictures/posts/%Y/%m/%d/')
+    create_time = models.DateTimeField(auto_now_add=True)
+    update_time = models.DateTimeField(auto_now=True)
+    parent_theme = models.ForeignKey('Theme', on_delete=PROTECT)
+    # author = models.ForeignKey('User', on_delete=PROTECT, null=True)  # TODO: Once authorisation is created, uncomment this and make sure it works
 
     def __str__(self):
         return self.theme
@@ -42,7 +47,7 @@ class Theme(models.Model):
     text = models.TextField(max_length=500)
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
-    # author = models.ForeignKey('User', on_delete=PROTECT, null=True)  FIX THAT ONCE YOU CREATE AUTHORISATION
+    # author = models.ForeignKey('User', on_delete=PROTECT, null=True)  # TODO: Once authorisation is created, uncomment this and make sure it works
 
     def __str__(self):
         return self.header
