@@ -5,7 +5,7 @@ from django.forms import ModelForm, TextInput, Textarea, FileInput
 class PostForm(ModelForm):
     class Meta:
         model = Post
-        fields = ['theme', 'text']
+        fields = ['theme', 'text', 'post_picture']
         widgets = {
             'theme': TextInput(attrs={
                 'class': 'form-control',
@@ -13,7 +13,11 @@ class PostForm(ModelForm):
 
             'text': Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': 'Сам пост'})
+                'placeholder': 'Сам пост'}),
+
+            'post_picture':  FileInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Вложение поста'})
         }
 
 

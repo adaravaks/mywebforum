@@ -11,27 +11,44 @@
 <div class="alert-success alert mt-2">
     <h3>{{ theme.header }}</h3>
     <p>{{ theme.text }}</p>
-    <img src="{{ theme.media.url }}" alt="Медиа-вложение темы" width="300" height="300">
+    {% if theme.media %}
+        <img src="{{ theme.media.url }}" alt="Медиа-вложение темы" width="300" height="300">
+    {% endif %}
     <p>Дата создания темы: {{ theme.time_create }}</p>
 </div>
 {% endfor %}
+
 {% if posts_related %}
 {% for post in posts_related %}
 <div class="alert-warning alert mt-2">
     <h3>{{ post.theme }}</h3>
     <p>{{ post.text }}</p>
-    <img src="{{ post.post_picture.url }}" alt="Медиа-вложение поста" width="200" height="200">
+    {% if post.post_picture %}
+        <img src="{{ post.post_picture.url }}" alt="Медиа-вложение поста" width="200" height="200">
+    {% endif %}
     <p>Дата создания поста: {{ post.create_time }}</p>
 </div>
 {% endfor %}
+
 {% else %}
 <div class="alert-danger alert mt-2">
     <p>Тему ещё никто не комментировал</p>
 </div>
 {% endif %}
+
 {% else %}
 <div class="alert-danger alert mt-2">
     <p>Темы нет</p>
 </div>
 {% endif %}
+
+<h1 class="text-white">Написать в тему</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.theme }} <br>
+    {{ form.text }} <br>
+    {{ form.post_picture }}
+    <p class="text-danger">{{ error }}</p>
+    <button type="submit" class="btn btn-success mt-5">Запостить</button>
+</form>
 {% endblock %}

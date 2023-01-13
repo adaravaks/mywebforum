@@ -10,6 +10,7 @@
     {% csrf_token %}
     {{ form.theme }} <br>
     {{ form.text }} <br>
+    {{ form.post_picture }}
     <button type="submit" class="btn btn-success mt-5">Запостить</button>
     <span>{{ error }}</span>
 </form>
