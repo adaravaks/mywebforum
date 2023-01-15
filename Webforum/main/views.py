@@ -20,24 +20,6 @@ def about(request):
     return render(request, 'main/about-us.html')
 
 
-def newpost(request):
-    error = ''
-    if request.method == 'POST':
-        form = PostForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('index')
-        else:
-            error = 'Неверный формат поста'
-
-    form = PostForm()
-    context = {
-        'form': form,
-        'error': error
-    }
-    return render(request, 'main/new-post.html', context)
-
-
 def newuser(request):
     error = ''
     if request.method == 'POST':
