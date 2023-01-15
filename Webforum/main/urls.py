@@ -9,4 +9,6 @@ urlpatterns = [
     path('users', views.users, name='users'),
     path('theme/<int:theme_id>', views.theme, name='theme'),
     path('new-theme', views.newtheme, name='new-theme'),
+    path('register', views.register, name='register'),
+    path('login', views.login, name='login'),
 ]

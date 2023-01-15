@@ -88,5 +88,13 @@ def newtheme(request):
     }
     return render(request, 'main/new-theme.html', context)
 
+
+def register(request):
+    return render(request, 'main/register.html')
+
+
+def login(request):
+    return render(request, 'main/login.html')
+
 # TODO: Reformat functions names to camelCase later
 # TODO: Change some of the view functions to view classes
