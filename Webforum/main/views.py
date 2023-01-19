@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+
 from .models import Post, User, Theme
-from .forms import PostForm, NewUserForm, ThemeForm
+from .forms import PostForm, NewUserForm, ThemeForm, RegisterUserForm
+from .utils import DataMixin
 
 
 def home(request):
@@ -89,12 +93,19 @@ def newtheme(request):
     return render(request, 'main/new-theme.html', context)
 
 
-def register(request):
-    return render(request, 'main/register.html')
-
-
 def login(request):
     return render(request, 'main/login.html')
+
+
+class RegisterUser(CreateView, DataMixin):
+    form_class = RegisterUserForm
+    template_name = 'main/register.html'
+    success_url = reverse_lazy('login')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title='Регистрация')
+        return dict(list(context.items()) + list(c_def.items()))
 
 # TODO: Reformat functions names to camelCase later
 # TODO: Change some of the view functions to view classes
