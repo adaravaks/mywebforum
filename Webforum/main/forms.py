@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
 from .models import Post, User as myUser, Theme
@@ -88,3 +88,8 @@ class RegisterUserForm(UserCreationForm):
                 'class': 'form-control',
                 'placeholder': 'Пароль ещё раз'})
         }
+
+
+class LoginUserForm(AuthenticationForm):
+    username = CharField(label='Имя пользователя', widget=TextInput(attrs={'class': 'form-control', 'placeholder': 'Имя пользователя'}))
+    password = CharField(label='Пароль', widget=PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Пароль'}))
