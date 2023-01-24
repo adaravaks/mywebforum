@@ -9,6 +9,7 @@
 {% if themes %}
 {% for theme in themes %}
 <div class="alert-success alert mt-2">
+    <p style="margin-left: 3%">Автор: {{theme.author_id}}</p>
     <h3>{{ theme.header }}</h3>
     <p>{{ theme.text }}</p>
     {% if theme.media %}

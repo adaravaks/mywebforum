@@ -1,6 +1,7 @@
 from django.db import models
-from django.db.models import SET_NULL, PROTECT
+from django.db.models import SET_NULL, PROTECT, CASCADE
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 
 class Post(models.Model):
@@ -9,8 +10,8 @@ class Post(models.Model):
     post_picture = models.ImageField(upload_to='communication_pictures/posts/%Y/%m/%d/', blank=True)
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
-    parent_theme = models.ForeignKey('Theme', on_delete=PROTECT, blank=True)
-    # author = models.ForeignKey('User', on_delete=PROTECT, null=True)  # TODO: Once authorisation is created, uncomment this and make sure it works
+    parent_theme = models.ForeignKey('Theme', on_delete=CASCADE, blank=True)
+    author = models.ForeignKey('auth.User', to_field='username', on_delete=PROTECT, null=True)  # TODO: Once authorisation is created, uncomment this and make sure it works
 
     def __str__(self):
         return self.theme
@@ -23,22 +24,11 @@ class Post(models.Model):
         return reverse('theme', kwargs={'theme_id': self.pk})
 
 
-class User(models.Model):
-    username = models.CharField(max_length=30)
-    about_user = models.TextField(blank=True)
-    profile_pic = models.ImageField(upload_to='profile_pictures/%Y/%m/%d/')
-    create_time = models.DateTimeField(auto_now_add=True)
-    update_time = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.username
-
-    class Meta:
-        verbose_name = 'Пользователь'
-        verbose_name_plural = 'Пользователи'
-
-    def get_absolute_url(self):
-        return reverse('theme', kwargs={'theme_id': self.pk})
+#class User(User):
+#    profile_picture = models.ImageField(upload_to='profile_pictures/posts/%Y/%m/%d/', blank=True)
+#    about_user = models.TextField('О себе', max_length=300)
+#    create_time = models.DateTimeField(auto_now_add=True)
+#    update_time = models.DateTimeField(auto_now=True)
 
 
 class Theme(models.Model):
@@ -47,7 +37,7 @@ class Theme(models.Model):
     text = models.TextField(max_length=500)
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
-    # author = models.ForeignKey('User', on_delete=PROTECT, null=True)  # TODO: Once authorisation is created, uncomment this and make sure it works
+    author = models.ForeignKey('auth.User', to_field='username', on_delete=PROTECT, null=True)  # TODO: Once authorisation is created, uncomment this and make sure it works
 
     def __str__(self):
         return self.header

@@ -24,23 +24,23 @@ class PostForm(ModelForm):
         }
 
 
-class NewUserForm(ModelForm):
-    class Meta:
-        model = myUser
-        fields = ('username', 'about_user', 'profile_pic')
-        widgets = {
-            'username': TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Юзернейм пользователя'}),
-
-            'about_user': TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'О пользователе'}),
-
-            'profile_pic': FileInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Аватарка пользователя'}),
-        }
+#class NewUserForm(ModelForm):
+#    class Meta:
+#        model = myUser
+#        fields = ('username', 'about_user', 'profile_pic')
+##        widgets = {
+##            'username': TextInput(attrs={
+##                'class': 'form-control',
+ ##               'placeholder': 'Юзернейм пользователя'}),
+##
+#            'about_user': TextInput(attrs={
+  #              'class': 'form-control',
+   #             'placeholder': 'О пользователе'}),
+#
+  #          'profile_pic': FileInput(attrs={
+  #              'class': 'form-control',
+  #              'placeholder': 'Аватарка пользователя'}),
+  #      }
 
 
 class ThemeForm(ModelForm):

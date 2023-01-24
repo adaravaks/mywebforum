@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
                 ('text', models.TextField(max_length=500)),
                 ('time_create', models.DateTimeField(auto_now_add=True)),
                 ('time_update', models.DateTimeField(auto_now=True)),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='main.user')),
+                ('author', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='auth.user')),
             ],
             options={
                 'verbose_name': 'Тема',
