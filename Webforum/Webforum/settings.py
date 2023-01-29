@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'captcha',
+    'debug_toolbar',
+    'verify_email.apps.VerifyEmailConfig',
     'main',
 ]
 
@@ -50,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'Webforum.urls'
@@ -129,3 +132,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'main/static/main/media')  # Subject to change in future
 MEDIA_URL = '/media/'
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'tseveleva2006@gmail.com'
+EMAIL_HOST_PASSWORD = 'suitwybfpbnzqwvh'
+
+DEFAULT_FROM_EMAIL = 'noreply<no-reply@comfortplace.com>'  # TODO: change email if domain name changes

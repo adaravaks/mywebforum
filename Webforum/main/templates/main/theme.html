@@ -6,18 +6,16 @@
 
 {% block content %}
 <h1 class="text-white">Тема и ответы к ней</h1>
-{% if theme_from_main %}
-{% for theme in theme_from_main %}  <!-- TODO: Get rid of for loop here -->
+{% if main_theme %}
 <div class="alert-success alert mt-2">
-    <p style="margin-left: 3%">Автор: {{theme.author_id}}</p>
-    <h3>{{ theme.header }}</h3>
-    <p>{{ theme.text }}</p>
-    {% if theme.media %}
-        <img src="{{ theme.media.url }}" alt="Медиа-вложение темы" width="300" height="300">
+    <p style="margin-left: 3%">Автор: {{main_theme.author_id}}</p>
+    <h3>{{ main_theme.header }}</h3>
+    <p>{{ main_theme.text }}</p>
+    {% if main_theme.media %}
+        <img src="{{ main_theme.media.url }}" alt="Медиа-вложение темы" width="300" height="300">
     {% endif %}
-    <p>Дата создания темы: {{ theme.time_create }}</p>
+    <p>Дата создания темы: {{ main_theme.time_create }}</p>
 </div>
-{% endfor %}
 
 {% if posts_related %}
 {% for post in posts_related %}

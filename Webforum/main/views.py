@@ -8,6 +8,8 @@ from .models import Post, User, Theme
 from .forms import PostForm, ThemeForm, RegisterUserForm, LoginUserForm
 from .utils import DataMixin
 
+from verify_email.email_handler import send_verification_email
+
 
 def home(request):
     context = {
@@ -27,7 +29,7 @@ def about(request):
 
 
 def theme(request, theme_id):
-    theme_from_main = Theme.objects.filter(pk=theme_id)  # TODO: Change 'filter' to 'get' and deal with that for-loop in theme.html
+    main_theme = Theme.objects.get(pk=theme_id)
     posts_related = Post.objects.filter(parent_theme_id=theme_id)
     error = ''
     if request.method == 'POST':
@@ -45,7 +47,7 @@ def theme(request, theme_id):
     form = PostForm()
     context = {
         'theme_id': theme_id,
-        'theme_from_main': theme_from_main,
+        'main_theme': main_theme,
         'posts_related': posts_related,
         'error': error,
         'form': form
@@ -84,8 +86,9 @@ class RegisterUser(CreateView, DataMixin):
         return dict(list(context.items()) + list(c_def.items()))
 
     def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
+        inactive_user = send_verification_email(self.request, form)
+        # user = form.save()
+        # login(self.request, user)
         return redirect('index')
 
 
