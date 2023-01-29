@@ -1,11 +1,13 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
-from .models import Post, User as myUser, Theme
+from .models import Post, Theme
 from django.forms import ModelForm, TextInput, Textarea, FileInput, PasswordInput, CharField, EmailInput, EmailField
+from captcha.fields import CaptchaField, CaptchaTextInput
 
 
 class PostForm(ModelForm):
+    captcha = CaptchaField(label='Капча', widget=CaptchaTextInput(attrs={'placeholder': 'Капча'}))
     class Meta:
         model = Post
         fields = ('theme', 'text', 'post_picture')
@@ -24,26 +26,8 @@ class PostForm(ModelForm):
         }
 
 
-#class NewUserForm(ModelForm):
-#    class Meta:
-#        model = myUser
-#        fields = ('username', 'about_user', 'profile_pic')
-##        widgets = {
-##            'username': TextInput(attrs={
-##                'class': 'form-control',
- ##               'placeholder': 'Юзернейм пользователя'}),
-##
-#            'about_user': TextInput(attrs={
-  #              'class': 'form-control',
-   #             'placeholder': 'О пользователе'}),
-#
-  #          'profile_pic': FileInput(attrs={
-  #              'class': 'form-control',
-  #              'placeholder': 'Аватарка пользователя'}),
-  #      }
-
-
 class ThemeForm(ModelForm):
+    captcha = CaptchaField(label='Капча', widget=CaptchaTextInput(attrs={'placeholder': 'Капча'}))
     class Meta:
         model = Theme
         fields = ('header', 'text', 'media')
@@ -58,7 +42,7 @@ class ThemeForm(ModelForm):
 
             'media': FileInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Вложение к теме'}),
+                'placeholder': 'Вложение к теме'})
         }
 
 
@@ -67,7 +51,7 @@ class RegisterUserForm(UserCreationForm):
     email = EmailField(label='Адрес электронной почты', widget=EmailInput(attrs={'class': 'form-control', 'placeholder': 'Адрес электронной почты'}))
     password1 = CharField(label='Пароль', widget=PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Пароль'}))
     password2 = CharField(label='Пароль ещё раз', widget=PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Пароль ещё раз'}))
-
+    captcha = CaptchaField(label='Капча', widget=CaptchaTextInput(attrs={'placeholder': 'Капча'}))
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
@@ -93,3 +77,4 @@ class RegisterUserForm(UserCreationForm):
 class LoginUserForm(AuthenticationForm):
     username = CharField(label='Имя пользователя', widget=TextInput(attrs={'class': 'form-control', 'placeholder': 'Имя пользователя'}))
     password = CharField(label='Пароль', widget=PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Пароль'}))
+    captcha = CaptchaField(label='Капча', widget=CaptchaTextInput(attrs={'placeholder': 'Капча'}))

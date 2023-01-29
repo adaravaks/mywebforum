@@ -45,12 +45,17 @@
 {% endif %}
 
 <h1 class="text-white">Написать в тему</h1>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.theme }} <br>
-    {{ form.text }} <br>
-    {{ form.post_picture }}
-    <p class="text-danger">{{ error }}</p>
-    <button type="submit" class="btn btn-success mt-5">Запостить</button>
-</form>
+{% if request.user.is_authenticated %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.theme }} <br>
+        {{ form.text }} <br>
+        {{ form.post_picture }} <br>
+        {{ form.captcha }}
+        <p class="text-danger">{{ error }}</p>
+        <button type="submit" class="btn btn-success mt-5">Запостить</button>
+    </form>
+{% else %}
+    <p class="text-white">Комментировать тему могут только авторизованные ползователи</p>
+{% endif %}
 {% endblock %}

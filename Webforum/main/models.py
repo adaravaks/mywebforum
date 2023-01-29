@@ -24,13 +24,6 @@ class Post(models.Model):
         return reverse('theme', kwargs={'theme_id': self.pk})
 
 
-#class User(User):
-#    profile_picture = models.ImageField(upload_to='profile_pictures/posts/%Y/%m/%d/', blank=True)
-#    about_user = models.TextField('О себе', max_length=300)
-#    create_time = models.DateTimeField(auto_now_add=True)
-#    update_time = models.DateTimeField(auto_now=True)
-
-
 class Theme(models.Model):
     header = models.CharField(max_length=100, db_index=True)
     media = models.ImageField(upload_to='communication_pictures/themes/%Y/%m/%d/', blank=True)

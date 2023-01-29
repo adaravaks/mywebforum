@@ -39,9 +39,9 @@
                                     aria-current="page">Главная</a></li>
             <li class="nav-item"><a href="{% url 'about-us' %}" style="color: #2D8693;" class="nav-link">О проекте</a>
             </li>
-            <li class="nav-item"><a href="{% url 'new-theme' %}" style="color: #2D8693;" class="nav-link">Создать тему</a></li>
             {% if request.user.is_authenticated %}
-                <li class="nav-item order-last">Привет, {{ user.username }} | <a href="{% url 'logout' %}" style="color: #2D8693;" class="nav-link">Выйти</a></li>
+            <li class="nav-item"><a href="{% url 'new-theme' %}" style="color: #2D8693;" class="nav-link">Создать тему</a></li>
+            <li class="nav-item order-last">Привет, {{ user.username }} | <a href="{% url 'logout' %}" style="color: #2D8693;" class="nav-link">Выйти</a></li>
             {% else %}
                 <li class="nav-item"><a href="{% url 'login' %}" style="color: #2D8693;" class="nav-link">Войти</a></li>
                 <li class="nav-item"><a href="{% url 'register' %}" style="color: #2D8693;" class="nav-link">Зарегистрироваться</a></li>

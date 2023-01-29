@@ -26,32 +26,6 @@ def about(request):
     return render(request, 'main/about-us.html')
 
 
-#def newuser(request):
-#   error = ''
-#   if request.method == 'POST':
-#       form = NewUserForm(request.POST, request.FILES)
-#       if form.is_valid():
-#           form.save()
-#           return redirect('users')
-#       else:
-#           error = 'Неверный ввод'
-#
-#    form = NewUserForm()
-#    context = {
-#        'form': form,
-#        'error': error
-#    }
-#    return render(request, 'main/new-user.html', context)
-
-
-#def users(request):
-#    users = User.objects.order_by('create_time')
-#    context = {
-#        'users': users,
-#    }
-#    return render(request, 'main/users.html', context)
-
-
 def theme(request, theme_id):
     theme_from_main = Theme.objects.filter(pk=theme_id)  # TODO: Change 'filter' to 'get' and deal with that for-loop in theme.html
     posts_related = Post.objects.filter(parent_theme_id=theme_id)
