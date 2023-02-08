@@ -1,13 +1,13 @@
 body {
-        background: url("../media/technical/background.jpg") repeat fixed center center;
+    background: linear-gradient(to right, rgb(0, 81, 108), rgb(1, 89, 127), rgb(1, 105, 118), rgb(0, 86, 87));
     background-size: 100%;
 }
 
-.size-90 {
+.f-size-90 {
     font-size: 90px;
 }
 
-.size-25 {
+.f-size-25 {
     font-size: 25px;
 }
 
@@ -19,6 +19,6 @@ body {
     bottom: auto;
 }
 
-.ml-25percents {
+.ml-12percents {
     margin-left: 12%;
 }

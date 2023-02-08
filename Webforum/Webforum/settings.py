@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'captcha',
     'debug_toolbar',
-    'verify_email.apps.VerifyEmailConfig',
     'main',
 ]
 
@@ -143,5 +142,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'tseveleva2006@gmail.com'
 EMAIL_HOST_PASSWORD = 'suitwybfpbnzqwvh'
-
-DEFAULT_FROM_EMAIL = 'noreply<no-reply@comfortplace.com>'  # TODO: change email if domain name changes
+EMAIL_FROM = 'noreply<no-reply@comfortplace.com>'
+PASSWORD_RESET_TIMEOUT = 7200

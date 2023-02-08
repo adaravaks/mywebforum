@@ -1,0 +1,7 @@
+{% autoescape off %}
+Это ты {{ user.username }}? <!-- TODO: Username is not mentioned in the sent email. Fix that -->
+
+Вот твоя ссылка на сто вирусов, тридцать майнеров, семь порч и два родовых проклятия:
+
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+{% endautoescape %}

@@ -1,14 +1,19 @@
-from django.contrib.auth import logout, login
+from django.contrib.auth import logout, login, get_user_model
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
+from django.contrib import messages
+from django.template.loader import render_to_string
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_str, force_bytes
+from django.core.mail import EmailMessage
 
 from .models import Post, User, Theme
 from .forms import PostForm, ThemeForm, RegisterUserForm, LoginUserForm
+from .tokens import account_activation_token
 from .utils import DataMixin
-
-from verify_email.email_handler import send_verification_email
 
 
 def home(request):
@@ -22,7 +27,6 @@ def index(request):
     themes = Theme.objects.order_by('-id')
     context = {'title': 'Главная страница', 'themes': themes}
     return render(request, 'main/index.html', context)
-
 
 def about(request):
     return render(request, 'main/about-us.html')
@@ -75,6 +79,41 @@ def newtheme(request):
     return render(request, 'main/new-theme.html', context)
 
 
+def activate(request, uidb64, token):
+    User = get_user_model()
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except:
+        user = None
+
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+        messages.success(request, 'Зареган. Логинься.')
+        return redirect('/accounts/login')
+    else:
+        messages.error(request, 'Что-то наебнулось')
+    return redirect('index')
+
+
+def activateEmail(request, user, to_email):
+    mail_subject = 'Подтверждение электронной почты'
+    message = render_to_string('main/email-verification-message.html', {
+        'user': user.username,
+        'domain': get_current_site(request).domain,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': account_activation_token.make_token(user),
+        'protocol': 'https' if request.is_secure() else 'http'
+    })
+    email = EmailMessage(mail_subject, message, to=[to_email])
+    if email.send():
+        messages.success(request, f'Ах ты ёбаный {user}, быстро пиздуй на свой {to_email} и подтверждай свою поганую регистрацию.')
+    else:
+        messages.error(request, f'Хуй тебе, а не письмо на {to_email}')
+
+
+
 class RegisterUser(CreateView, DataMixin):
     form_class = RegisterUserForm
     template_name = 'main/register.html'
@@ -86,9 +125,10 @@ class RegisterUser(CreateView, DataMixin):
         return dict(list(context.items()) + list(c_def.items()))
 
     def form_valid(self, form):
-        inactive_user = send_verification_email(self.request, form)
-        # user = form.save()
-        # login(self.request, user)
+        user = form.save(commit=False)
+        user.is_active = False
+        user.save()
+        activateEmail(self.request, user, form.cleaned_data.get('email'))
         return redirect('index')
 
 
@@ -108,6 +148,3 @@ class LoginUser(DataMixin, LoginView):
 def logout_user(request):
     logout(request)
     return redirect('index')
-
-
-# TODO: Change some of the view functions to view classes
