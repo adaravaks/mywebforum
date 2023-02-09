@@ -90,10 +90,10 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        messages.success(request, 'Зареган. Логинься.')
+        messages.success(request, 'Зареган. Логинься.', extra_tags='alert-success alert')
         return redirect('/accounts/login')
     else:
-        messages.error(request, 'Что-то наебнулось')
+        messages.error(request, 'Что-то наебнулось', extra_tags='alert-danger alert')
     return redirect('index')
 
 
@@ -108,10 +108,9 @@ def activateEmail(request, user, to_email):
     })
     email = EmailMessage(mail_subject, message, to=[to_email])
     if email.send():
-        messages.success(request, f'Ах ты ёбаный {user}, быстро пиздуй на свой {to_email} и подтверждай свою поганую регистрацию.')
+        messages.success(request, f'Ах ты ёбаный {user}, быстро пиздуй на свой {to_email} и подтверждай свою поганую регистрацию.', extra_tags='alert-success alert')
     else:
-        messages.error(request, f'Хуй тебе, а не письмо на {to_email}')
-
+        messages.error(request, f'Хуй тебе, а не письмо на {to_email}', extra_tags='alert-danger alert')
 
 
 class RegisterUser(CreateView, DataMixin):

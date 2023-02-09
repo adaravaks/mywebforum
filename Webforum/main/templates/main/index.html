@@ -5,11 +5,22 @@
 {% endblock %}
 
 {% block content %}
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
 <h1 class="text-white">Темы</h1>
 {% if themes %}
 {% for theme in themes %}
 <div class="alert-success alert mt-2">
-    <p style="margin-left: 3%">Автор: {{theme.author_id}}</p>
+    {% if theme.author_id %}
+        <p style="margin-left: 3%">Автор: {{theme.author_id}}</p>
+    {% else %}
+        <p style="margin-left: 3%">Автор: Аноним</p>
+    {% endif %}
     <h3>{{ theme.header }}</h3>
     <p>{{ theme.text }}</p>
     {% if theme.media %}
