@@ -3,6 +3,10 @@ body {
     background-size: 100%;
 }
 
+.main-website-color {
+    color: rgb(45, 134, 147);
+}
+
 .f-size-90 {
     font-size: 90px;
 }
@@ -21,4 +25,8 @@ body {
 
 .ml-12percents {
     margin-left: 12%;
+}
+
+.theme-display {
+    background-color: #0b8f94;
 }

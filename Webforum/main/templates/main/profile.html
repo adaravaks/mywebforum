@@ -1,0 +1,9 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Профиль {{ user.username }}
+{% endblock %}
+
+{% block content %}
+<p class="text-white">Это профиль {{ user.username }}</p>
+{% endblock %}

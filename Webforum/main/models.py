@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import SET_NULL, PROTECT, CASCADE
 from django.urls import reverse
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User  # This is NOT unused import. Do not delete this
 
 
 class Post(models.Model):
@@ -11,7 +11,7 @@ class Post(models.Model):
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
     parent_theme = models.ForeignKey('Theme', on_delete=CASCADE, blank=True)
-    author = models.ForeignKey('auth.User', to_field='username', on_delete=PROTECT, null=True)  # TODO: Once authorisation is created, uncomment this and make sure it works
+    author = models.ForeignKey('auth.User', to_field='username', on_delete=PROTECT, null=True)
 
     def __str__(self):
         return self.theme
@@ -21,7 +21,7 @@ class Post(models.Model):
         verbose_name_plural = 'Посты'
 
     def get_absolute_url(self):
-        return reverse('theme', kwargs={'theme_id': self.pk})
+        return reverse('post', kwargs={'post_id': self.pk})
 
 
 class Theme(models.Model):
@@ -30,7 +30,7 @@ class Theme(models.Model):
     text = models.TextField(max_length=500)
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
-    author = models.ForeignKey('auth.User', to_field='username', on_delete=PROTECT, null=True)  # TODO: Once authorisation is created, uncomment this and make sure it works
+    author = models.ForeignKey('auth.User', to_field='username', on_delete=PROTECT, null=True)
 
     def __str__(self):
         return self.header

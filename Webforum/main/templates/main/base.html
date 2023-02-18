@@ -41,7 +41,8 @@
             </li>
             {% if request.user.is_authenticated %}
             <li class="nav-item"><a href="{% url 'new-theme' %}" style="color: #2D8693;" class="nav-link">Создать тему</a></li>
-            <li class="nav-item order-last">Привет, {{ user.username }} | <a href="{% url '/accounts/logout' %}" style="color: #2D8693;" class="nav-link">Выйти</a></li>
+            <li class="nav-item order-last"><a href="{% url '/accounts/profile' request.user.username %}" style="color: #2D8693;" class="nav-link">В профиль</a></li>
+            <li class="nav-item order-last"><a href="{% url '/accounts/logout' %}" style="color: #2D8693;" class="nav-link">Выйти</a></li>
             {% else %}
                 <li class="nav-item"><a href="{% url '/accounts/login' %}" style="color: #2D8693;" class="nav-link">Войти</a></li>
                 <li class="nav-item"><a href="{% url '/accounts/register' %}" style="color: #2D8693;" class="nav-link">Зарегистрироваться</a></li>

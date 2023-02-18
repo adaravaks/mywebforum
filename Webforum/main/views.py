@@ -1,4 +1,4 @@
-from django.contrib.auth import logout, login, get_user_model
+from django.contrib.auth import logout, login, get_user_model, get_user
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -27,6 +27,7 @@ def index(request):
     themes = Theme.objects.order_by('-id')
     context = {'title': 'Главная страница', 'themes': themes}
     return render(request, 'main/index.html', context)
+
 
 def about(request):
     return render(request, 'main/about-us.html')
@@ -147,3 +148,11 @@ class LoginUser(DataMixin, LoginView):
 def logout_user(request):
     logout(request)
     return redirect('index')
+
+
+def profile(request, username):
+    wanted_user = User.objects.get(username=username)
+    context = {}
+    if request.user.is_authenticated:
+        context['user'] = wanted_user
+    return render(request, 'main/profile.html', context)

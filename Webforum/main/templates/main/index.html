@@ -4,6 +4,10 @@
 {{ title }}
 {% endblock %}
 
+{% block user_id %}
+{{ user.pk }}
+{% endblock %}
+
 {% block content %}
 {% if messages %}
     <ul class="messages">
@@ -15,9 +19,9 @@
 <h1 class="text-white">Темы</h1>
 {% if themes %}
 {% for theme in themes %}
-<div class="alert-success alert mt-2">
+<div class="mt-2 theme-display alert">
     {% if theme.author_id %}
-        <p style="margin-left: 3%">Автор: {{theme.author_id}}</p>
+        <p style="margin-left: 3%">Автор: <a href="{% url '/accounts/profile' theme.author_id %}" class="text-black">{{theme.author_id}}</a></p>
     {% else %}
         <p style="margin-left: 3%">Автор: Аноним</p>
     {% endif %}

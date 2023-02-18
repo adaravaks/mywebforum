@@ -8,11 +8,11 @@
 <h1 class="text-white">Тема и ответы к ней</h1>
 {% if main_theme %}
 <div class="alert-success alert mt-2">
-    <p style="margin-left: 3%">Автор: {{main_theme.author_id}}</p>
+    <p style="margin-left: 3%">Автор: {% if main_theme.author_id %} <a href="{% url '/accounts/profile' main_theme.author_id %}" class="main-website-color">{{main_theme.author_id}}</a> {% else %} Аноним {% endif %}</p>
     <h3>{{ main_theme.header }}</h3>
     <p>{{ main_theme.text }}</p>
     {% if main_theme.media %}
-        <img src="{{ main_theme.media.url }}" alt="Медиа-вложение темы" width="300" height="300">
+        <img src="{{ main_theme.media.url }}" alt="Медиа-вложение темы" width="300" height="300">   <!-- TODO: Make images more flexible -->
     {% endif %}
     <p>Дата создания темы: {{ main_theme.time_create }}</p>
 </div>
@@ -20,7 +20,7 @@
 {% if posts_related %}
 {% for post in posts_related %}
 <div class="alert-warning alert mt-2">
-    <p style="margin-left: 3%">Автор: {{post.author_id}}</p>
+    <p style="margin-left: 3%">Автор: {% if post.author_id %} <a href="{% url '/accounts/profile' main_theme.author_id %}" class="main-website-color">{{post.author_id}}</a> {% else %} Аноним {% endif %}</p>
     <h3>{{ post.theme }}</h3>
     <p>{{ post.text }}</p>
     {% if post.post_picture %}
