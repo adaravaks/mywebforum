@@ -1,0 +1,34 @@
+.theme-container {
+    background-color: white;
+    display: flex;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.theme-text-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.theme-image {
+    width: 300px;
+    height: 100%;
+    margin: 20px;
+}
+
+.headers-text-style-one {
+    color: white;
+    text-shadow: 1px 1px 7px rgb(106, 220, 241);
+}
+
+.headers-text-style-two {
+    color: rgb(45, 134, 147);
+    text-shadow: 1px 1px 7px rgb(106, 220, 241);
+}
+
+.plain-text-style {
+    color: rgb(14, 111, 126);
+}
+
+.into-theme-button {
+}

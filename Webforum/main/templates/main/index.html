@@ -16,25 +16,21 @@
         {% endfor %}
     </ul>
 {% endif %}
-<h1 class="text-white">Темы</h1>
+
+<h1 class="headers-text-style-one">Темы</h1>
 {% if themes %}
 {% for theme in themes %}
-<div class="mt-2 theme-display alert">
-    {% if theme.author_id %}
-        <p style="margin-left: 3%">Автор: <a href="{% url '/accounts/profile' theme.author_id %}" class="text-black">{{theme.author_id}}</a></p>
-    {% else %}
-        <p style="margin-left: 3%">Автор: Аноним</p>
-    {% endif %}
-    <h3>{{ theme.header }}</h3>
-    <p>{{ theme.text }}</p>
-    {% if theme.media %}
-        <img src="{{ theme.media.url }}" alt="Медиа-вложение темы" width="300" height="300">
-    {% endif %}
-    <p>Дата создания темы: {{ theme.time_create }}</p>
-    <div style="display: flex; justify-content: flex-end">
-        <a href="{{ theme.get_absolute_url }}" class="btn btn-danger" style="margin-left: auto">В тему</a>
+    <div class="theme-container">
+        {% if theme.media %}
+            <img src="{{ theme.media.url }}" alt="Медиа-вложение темы" class="theme-image">
+        {% endif %}
+        <div class="theme-text-container">
+            <h3 class="headers-text-style-two">{{ theme.header }}</h3>
+            <p class="plain-text-style">{{ theme.text }}</p>
+            <p class="plain-text-style">Автор: <a href="{% url '/accounts/profile' theme.author_id %}" class="">{{theme.author_id}}</a><br>Дата создания темы: {{ theme.time_create }}</p>
+            <a href="{{ theme.get_absolute_url }}" class="into-theme-button">В тему</a>
+        </div>
     </div>
-</div>
 {% endfor %}
 {% else %}
 <div class="alert-danger alert mt-2">

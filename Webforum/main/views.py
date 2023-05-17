@@ -153,6 +153,6 @@ def logout_user(request):
 def profile(request, username):
     wanted_user = User.objects.get(username=username)
     context = {}
-    if request.user.is_authenticated:
+    if request.user.is_authenticated:  # TODO: The fuck is this? I neither remember coding that nor want my website to behave that way
         context['user'] = wanted_user
     return render(request, 'main/profile.html', context)

@@ -6,7 +6,7 @@ from django.contrib.auth.models import User  # This is NOT unused import. Do not
 
 class Post(models.Model):
     theme = models.CharField('Тема', max_length=70)
-    text = models.TextField('Пост')
+    text = models.TextField('Пост', max_length=3000)
     post_picture = models.ImageField(upload_to='communication_pictures/posts/%Y/%m/%d/', blank=True)
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
@@ -27,7 +27,7 @@ class Post(models.Model):
 class Theme(models.Model):
     header = models.CharField(max_length=100, db_index=True)
     media = models.ImageField(upload_to='communication_pictures/themes/%Y/%m/%d/', blank=True)
-    text = models.TextField(max_length=500)
+    text = models.TextField(max_length=5000)
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
     author = models.ForeignKey('auth.User', to_field='username', on_delete=PROTECT, null=True)
