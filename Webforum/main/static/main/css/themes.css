@@ -3,9 +3,12 @@
     display: flex;
     margin-top: 15px;
     margin-bottom: 30px;
+    border-radius: 20px;
 }
 
 .theme-text-container {
+    margin-top: 15px;
+    margin-bottom: 15px;
     display: flex;
     flex-direction: column;
 }
@@ -16,19 +19,45 @@
     margin: 20px;
 }
 
-.headers-text-style-one {
-    color: white;
-    text-shadow: 1px 1px 7px rgb(106, 220, 241);
-}
-
-.headers-text-style-two {
-    color: rgb(45, 134, 147);
-    text-shadow: 1px 1px 7px rgb(106, 220, 241);
-}
-
-.plain-text-style {
-    color: rgb(14, 111, 126);
+.pictureless-theme {
+    margin-left: 340px;
 }
 
 .into-theme-button {
+    align-self: flex-end;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px;
+    margin-right: 20px;
+    color: rgb(45, 134, 147);
+    background-color: white;
+    border-radius: 10px;
+    max-width: 90px;
+    text-align: center;
+    transition: all 0.7s linear;
+}
+
+.into-theme-button:hover {
+    transition: all 0.3s linear;
+    color: white;
+    background-color: rgb(45, 134, 147);
+}
+
+.theme-author-button {
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px;
+    margin-bottom: 5px;
+    color: rgb(45, 134, 147);
+    background-color: white;
+    border-radius: 10px;
+    max-width: 90px;
+    text-align: center;
+    transition: all 0.7s linear;
+}
+
+.theme-author-button:hover {
+    transition: all 0.3s linear;
+    color: white;
+    background-color: rgb(45, 134, 147);
 }

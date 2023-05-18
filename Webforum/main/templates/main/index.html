@@ -23,13 +23,15 @@
     <div class="theme-container">
         {% if theme.media %}
             <img src="{{ theme.media.url }}" alt="Медиа-вложение темы" class="theme-image">
+            <div class="theme-text-container">
+        {% else %}
+            <div class="theme-text-container pictureless-theme">
         {% endif %}
-        <div class="theme-text-container">
-            <h3 class="headers-text-style-two">{{ theme.header }}</h3>
-            <p class="plain-text-style">{{ theme.text }}</p>
-            <p class="plain-text-style">Автор: <a href="{% url '/accounts/profile' theme.author_id %}" class="">{{theme.author_id}}</a><br>Дата создания темы: {{ theme.time_create }}</p>
-            <a href="{{ theme.get_absolute_url }}" class="into-theme-button">В тему</a>
-        </div>
+                <h3 class="headers-text-style-two">{{ theme.header }}</h3>
+                <p class="plain-text-style">{{ theme.text }}</p>
+                <p class="plain-text-style">Автор: <a href="{% url '/accounts/profile' theme.author_id %}" class="theme-author-button">{{theme.author_id}}</a><br>Дата создания темы: {{ theme.time_create }}</p>
+                <a href="{{ theme.get_absolute_url }}" class="into-theme-button">В тему</a>
+            </div>
     </div>
 {% endfor %}
 {% else %}
