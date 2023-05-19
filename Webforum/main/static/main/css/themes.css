@@ -1,3 +1,23 @@
+.themes-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-theme-button {
+    border-radius: 15px;
+    color: white;
+    text-decoration: none;
+    padding: 8px;
+    transition: all 0.7s linear;
+}
+
+.add-theme-button:hover {
+    color: rgb(45, 134, 147);
+    background-color: white;
+    transition: all 0.3s linear;
+}
+
 .theme-container {
     background-color: white;
     display: flex;
@@ -20,7 +40,7 @@
 }
 
 .pictureless-theme {
-    margin-left: 340px;
+    margin-left: 240px;
 }
 
 .into-theme-button {

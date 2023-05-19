@@ -17,7 +17,10 @@
     </ul>
 {% endif %}
 
-<h1 class="headers-text-style-one">Темы</h1>
+<div class="themes-page-header">
+    <h1 class="headers-text-style-one">Темы</h1>
+    <h2 class="headers-text-style-one"><a href="{% url 'new-theme' %}" class="add-theme-button"><i class="fa-solid fa-plus"></i> Добавить</a></h2>
+</div>
 {% if themes %}
 {% for theme in themes %}
     <div class="theme-container">
