@@ -25,7 +25,7 @@
 {% for theme in themes %}
     <div class="theme-container">
         {% if theme.media %}
-            <img src="{{ theme.media.url }}" alt="Медиа-вложение темы" class="theme-image">
+            <img src="{{ theme.media.url }}" data-fancybox alt="Медиа-вложение темы" class="theme-image">
             <div class="theme-text-container">
         {% else %}
             <div class="theme-text-container pictureless-theme">
