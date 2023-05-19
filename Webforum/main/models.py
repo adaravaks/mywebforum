@@ -25,7 +25,7 @@ class Post(models.Model):
 
 
 class Theme(models.Model):
-    header = models.TextField(max_length=500, db_index=True)
+    header = models.TextField(max_length=200, db_index=True)
     media = models.ImageField(upload_to='communication_pictures/themes/%Y/%m/%d/', blank=True)
     text = models.TextField(max_length=5000)
     time_create = models.DateTimeField(auto_now_add=True)

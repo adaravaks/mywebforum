@@ -54,6 +54,10 @@ body {
     text-shadow: 1px 1px 7px rgb(106, 220, 241);
 }
 
-.plain-text-style {
+.plain-text-style-one {
+    color: white;
+}
+
+.plain-text-style-two {
     color: rgb(14, 111, 126);
 }
