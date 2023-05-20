@@ -1,44 +1,54 @@
 {% extends 'main/base.html' %}
 
 {% block title %}
-Тема
+Тема: {{ main_theme.header|truncatewords:10 }}
 {% endblock %}
 
 {% block content %}
-<h1 class="text-white">Тема и ответы к ней</h1>
+<div class="page-header-container">
+    <h2 class="headers-text-style-one"><a href="{% url 'index' %}" class="header-button"><i class="fa-solid fa-arrow-left"></i> Назад</a></h2>
+    <h1 class="headers-text-style-one">Тема</h1>
+</div>
 {% if main_theme %}
-<div class="alert-success alert mt-2">
-    <p style="margin-left: 3%">Автор: {% if main_theme.author_id %} <a href="{% url '/accounts/profile' main_theme.author_id %}" class="main-color">{{main_theme.author_id}}</a> {% else %} Аноним {% endif %}</p>
-    <h3>{{ main_theme.header }}</h3>
-    <p>{{ main_theme.text }}</p>
-    {% if main_theme.media %}
-        <img src="{{ main_theme.media.url }}" alt="Медиа-вложение темы" width="300" height="300">   <!-- TODO: Make images more flexible -->
-    {% endif %}
-    <p>Дата создания темы: {{ main_theme.time_create }}</p>
-</div>
+    <div class="outer-theme-container">
+        <div class="info-theme-container">
+            <p class="theme-info">Автор: <a href="{% url '/accounts/profile' main_theme.author_id %}" class="theme-author-button">{{main_theme.author_id}}</a></p>
+            <p class="theme-info">Дата создания темы: {{ main_theme.time_create }}</p>
+        </div>
+        <div class="main-theme-container">
+            {% if main_theme.media %}
+                <img src="{{ main_theme.media.url }}" data-fancybox alt="Медиа-вложение темы" class="theme-image">
+                <div class="theme-text-container">
+            {% else %}
+                <div class="theme-text-container pictureless-theme">
+            {% endif %}
+                    <h3 class="headers-text-style-two">{{ main_theme.header }}</h3>
+                    <p class="plain-text-style-two">{{ main_theme.text|truncatewords:100 }}</p>
+                </div>
+        </div>
+    </div>
 
-{% if posts_related %}
-{% for post in posts_related %}
-<div class="alert-warning alert mt-2">
-    <p style="margin-left: 3%">Автор: {% if post.author_id %} <a href="{% url '/accounts/profile' main_theme.author_id %}" class="main-color">{{post.author_id}}</a> {% else %} Аноним {% endif %}</p>
-    <h3>{{ post.theme }}</h3>
-    <p>{{ post.text }}</p>
-    {% if post.post_picture %}
-        <img src="{{ post.post_picture.url }}" alt="Медиа-вложение поста" width="200" height="200">
-    {% endif %}
-    <p>Дата создания поста: {{ post.create_time }}</p>
-</div>
-{% endfor %}
+    {% if posts_related %}
+    {% for post in posts_related %}
+    <div class="alert-warning alert mt-2">
+        <p style="margin-left: 3%">Автор: {% if post.author_id %} <a href="{% url '/accounts/profile' main_theme.author_id %}" class="main-color">{{post.author_id}}</a> {% else %} Аноним {% endif %}</p>
+        <h3>{{ post.theme }}</h3>
+        <p>{{ post.text }}</p>
+        {% if post.post_picture %}
+            <img src="{{ post.post_picture.url }}" alt="Медиа-вложение поста" width="200" height="200">
+        {% endif %}
+        <p>Дата создания поста: {{ post.create_time }}</p>
+    </div>
+    {% endfor %}
 
+    {% else %}
+    <div class="alert-danger alert mt-2">
+        <p>Тему ещё никто не комментировал</p>
+    </div>
+    {% endif %}
 {% else %}
 <div class="alert-danger alert mt-2">
-    <p>Тему ещё никто не комментировал</p>
-</div>
-{% endif %}
-
-{% else %}
-<div class="alert-danger alert mt-2">
-    <p>Темы нет</p>
+    <p>Такой темы нет</p>
 </div>
 {% endif %}
 
