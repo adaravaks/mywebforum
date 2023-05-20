@@ -10,7 +10,7 @@ class PostForm(ModelForm):
     captcha = CaptchaField(label='Капча', widget=CaptchaTextInput(attrs={'placeholder': 'Капча'}))
     class Meta:
         model = Post
-        fields = ('theme', 'text', 'post_picture')
+        fields = ('text', 'post_picture')
         widgets = {
             'theme': TextInput(attrs={
                 'class': 'form-control',
@@ -18,7 +18,7 @@ class PostForm(ModelForm):
 
             'text': Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': 'Сам пост'}),
+                'placeholder': 'Пост'}),
 
             'post_picture':  FileInput(attrs={
                 'class': 'form-control',

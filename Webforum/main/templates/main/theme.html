@@ -23,27 +23,34 @@
                 <div class="theme-text-container pictureless-theme">
             {% endif %}
                     <h3 class="headers-text-style-two">{{ main_theme.header }}</h3>
-                    <p class="plain-text-style-two">{{ main_theme.text|truncatewords:100 }}</p>
+                    <p class="plain-text-style-two">{{ main_theme.text }}</p>
                 </div>
         </div>
     </div>
 
     {% if posts_related %}
     {% for post in posts_related %}
-    <div class="alert-warning alert mt-2">
-        <p style="margin-left: 3%">Автор: {% if post.author_id %} <a href="{% url '/accounts/profile' main_theme.author_id %}" class="main-color">{{post.author_id}}</a> {% else %} Аноним {% endif %}</p>
-        <h3>{{ post.theme }}</h3>
-        <p>{{ post.text }}</p>
-        {% if post.post_picture %}
-            <img src="{{ post.post_picture.url }}" alt="Медиа-вложение поста" width="200" height="200">
-        {% endif %}
-        <p>Дата создания поста: {{ post.create_time }}</p>
+    <div class="outer-post-container">
+        <div class="info-post-container">
+            <p class="post-info">Автор: {% if post.author_id %} <a href="{% url '/accounts/profile' post.author_id %}" class="post-author-button">{{post.author_id}}</a> {% else %} Аноним {% endif %}</p>
+            <p class="post-info">Дата написания: {{ post.create_time }}</p>
+        </div>
+        <div class="main-post-container">
+            {% if post.post_picture %}
+                <img src="{{ post.post_picture.url }}" data-fancybox alt="Медиа-вложение темы" class="post-image">
+                <div class="post-text-container">
+            {% else %}
+                <div class="post-text-container pictureless-post">
+            {% endif %}
+                    <p class="plain-text-style-two">{{ post.text }}</p>
+                </div>
+        </div>
     </div>
     {% endfor %}
 
     {% else %}
-    <div class="alert-danger alert mt-2">
-        <p>Тему ещё никто не комментировал</p>
+    <div class="no-posts-alert-container">
+        <p class="no-posts-alert-message">Тему ещё никто не комментировал. Нет ничего плохого в том, чтобы стать первым! 😉</p>
     </div>
     {% endif %}
 {% else %}
@@ -64,6 +71,6 @@
         <button type="submit" class="btn btn-success mt-5">Запостить</button>
     </form>
 {% else %}
-    <p class="text-white">Комментировать тему могут только авторизованные ползователи</p>
+    <p class="text-white">Комментировать тему могут только авторизованные ползователи</p>  <!-- TODO: Unwanted behaviour -->
 {% endif %}
 {% endblock %}
