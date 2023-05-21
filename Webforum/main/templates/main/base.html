@@ -20,41 +20,37 @@
     <link rel="mask-icon" href="{% static 'main/media/technical/safari-pinned-tab.svg' %}" color="#2d8693">
     <link rel="shortcut icon" href="{% static 'main/media/technical/favicon.ico' %}">
     <link type="text/css" rel="stylesheet" href="{% static 'main/css/other.css' %}">
-    <link type="text/css" rel="stylesheet" href="{% static 'main/css/themes.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'main/css/themes-desktop.css' %}">
     <link type="text/css" rel="stylesheet" href="{% static 'main/css/themes-mobile.css' %}">
-    <link type="text/css" rel="stylesheet" href="{% static 'main/css/posts.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'main/css/posts-desktop.css' %}">
     <link type="text/css" rel="stylesheet" href="{% static 'main/css/posts-mobile.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'main/css/header-desktop.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'main/css/header-mobile.css' %}">
     <meta name="msapplication-TileColor" content="#2d8693">
     <meta name="msapplication-config" content="Webforum/main/static/main/media/technical/browserconfig.xml">
     <meta name="theme-color" content="#2d8693">
 </head>
 <body>
 <div class="container">
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom bg-white rounded-4">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+    <header class="header-container">
+        <a href="/" class="header-link-logo">
             <svg width="60" height="40" viewBox="0 0 793 909" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M426 240C443.5 270.5 474 268 489.5 259.5M588 281C598 301 627 307 644.5 293" stroke="#2D8693"
                       stroke-width="20" stroke-linecap="round"/>
                 <path d="M439.818 362.5C710.318 528.5 760.318 140 731.318 97.5001M647.818 130C657.818 118 709.818 85.9996 730.818 97.0001M488.318 85.4996C556.318 77 626.318 109.5 647.318 130M436.318 10C451.318 10 479.318 52 487.818 85M361.318 129C387.818 57.5 419.318 21.5 435.818 10.5M43.8456 675C-100.645 292 257.851 112 361.846 130.5M620.352 820C349.352 1006 114.352 821.5 44.3516 676M752.852 364C846.852 585 691.352 772.5 621.352 819.5"
                       stroke="#2D8693" stroke-width="20" stroke-linecap="round"/>
             </svg>
-            <span class="fs-4" style="color: #2D8693;">ComfortPlace</span>
+            <span class="">ComfortPlace</span>
         </a>
-
-        <ul class="nav nav-pills">
-            <li class="nav-item"><a href="{% url 'index' %}" class="nav-link" style="color: #2D8693;"
-                                    aria-current="page">Главная</a></li>
-            <li class="nav-item"><a href="{% url 'about-us' %}" style="color: #2D8693;" class="nav-link">О проекте</a>
-            </li>
-            {% if request.user.is_authenticated %}
-            <li class="nav-item order-last"><a href="{% url '/accounts/profile' request.user.username %}" style="color: #2D8693;" class="nav-link">В профиль</a></li>
-            <li class="nav-item order-last"><a href="{% url '/accounts/logout' %}" style="color: #2D8693;" class="nav-link">Выйти</a></li>
-            {% else %}
-                <li class="nav-item"><a href="{% url '/accounts/login' %}" style="color: #2D8693;" class="nav-link">Войти</a></li>
-                <li class="nav-item"><a href="{% url '/accounts/register' %}" style="color: #2D8693;" class="nav-link">Зарегистрироваться</a></li>
-            {% endif %}
-
-        </ul>
+        <a href="{% url 'index' %}" class="header-link" aria-current="page">Главная</a>
+        <a href="{% url 'about-us' %}" class="header-link">О проекте</a>
+        {% if request.user.is_authenticated %}
+            <a href="{% url '/accounts/profile' request.user.username %}" class="header-link">В профиль</a>
+            <a href="{% url '/accounts/logout' %}" class="header-link">Выйти</a>
+        {% else %}
+            <a href="{% url '/accounts/login' %}" class="header-link">Войти</a>
+            <a href="{% url '/accounts/register' %}" class="header-link">Зарегистрироваться</a>
+        {% endif %}
     </header>
 </div>
 <div class="container">{% block content %}{% endblock %}</div>
