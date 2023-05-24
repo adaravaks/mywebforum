@@ -12,10 +12,6 @@ class PostForm(ModelForm):
         model = Post
         fields = ('text', 'post_picture')
         widgets = {
-            'theme': TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Тема поста'}),
-
             'text': Textarea(attrs={
                 'class': 'form-control',
                 'placeholder': 'Пост'}),
